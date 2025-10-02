@@ -1,18 +1,18 @@
-# Utilise Node.js officiel
-FROM node:18
+# Image de base Node.js
+FROM node:18-alpine
 
-# Créer un dossier de travail
-WORKDIR /usr/src/app
+# Créer le répertoire de l'app
+WORKDIR /app
 
-# Copier et installer les dépendances
+# Copier package.json et installer les dépendances
 COPY package*.json ./
-RUN npm install --production
+RUN npm install
 
-# Copier le reste du code
+# Copier le code source
 COPY . .
 
-# Exposer le port de l’app
+# Exposer le port
 EXPOSE 3000
 
-# Lancer l'application
+# Démarrer l'application
 CMD ["npm", "start"]
