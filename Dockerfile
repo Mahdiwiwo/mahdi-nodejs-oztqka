@@ -1,18 +1,21 @@
-# Image de base Node.js
 FROM node:18-alpine
 
-# Créer le répertoire de l'app
 WORKDIR /app
 
-# Copier package.json et installer les dépendances
+# Copy package files first for better caching
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
 
-# Copier le code source
+# Copy application source
 COPY . .
 
-# Exposer le port
+# Expose the correct port
 EXPOSE 3000
 
-# Démarrer l'application
-CMD ["npm", "start"]
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
+
+# Start the application
+USER node
+CMD ["node", "index.js"]
