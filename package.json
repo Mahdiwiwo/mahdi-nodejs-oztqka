@@ -1,18 +1,11 @@
 {
   "name": "mahdi-nodejs-app",
   "version": "1.0.0",
-  "description": "Application Node.js pour déploiement Dokploy",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.18.2"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "keywords": ["nodejs", "dokploy", "deployment"],
-  "author": "Mahdi",
-  "license": "MIT"
+  }
 }
